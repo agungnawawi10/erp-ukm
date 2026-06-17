@@ -11,7 +11,9 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
 
-#[Fillable(['name', 'email', 'password'])]
+// ... kode bagian atas tetap sama ...
+
+#[Fillable(['name', 'email', 'password', 'phone', 'position', 'is_active'])] // <-- Tambahkan di sini
 #[Hidden(['password', 'remember_token'])]
 class User extends Authenticatable
 {
@@ -28,6 +30,7 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'is_active' => 'boolean', // (Opsional) Bagus juga ditambahkan agar Laravel otomatis mengubah 0/1 dari database menjadi true/false di PHP
         ];
     }
 }
