@@ -33,4 +33,8 @@ class User extends Authenticatable
             'is_active' => 'boolean', // (Opsional) Bagus juga ditambahkan agar Laravel otomatis mengubah 0/1 dari database menjadi true/false di PHP
         ];
     }
+    public function purchaseOrders()
+    {
+        return $this->hasMany(PurchaseOrder::class, 'created_by');
+    }
 }
