@@ -16,7 +16,7 @@ class UserSeeder extends Seeder
     {
         User::factory()->create([
             'name' => 'Agung Nawawi',
-            'email' => 'admin@erpukm.com',
+            'email' => 'nawawiagung354@gmail.com',
             'password' => Hash::make('password'), // Password untuk login
             'phone' => '081234567890',
             'position' => 'Super Admin',
