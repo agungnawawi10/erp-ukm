@@ -30,7 +30,7 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
-            'is_active' => 'boolean', // (Opsional) Bagus juga ditambahkan agar Laravel otomatis mengubah 0/1 dari database menjadi true/false di PHP
+            'is_active' => 'boolean', //agar Laravel otomatis mengubah 0/1 dari database menjadi true/false di PHP
         ];
     }
     public function purchaseOrders()
