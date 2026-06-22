@@ -15,10 +15,15 @@ class ProductsTable
     {
         return $table
             ->columns([
-                TextColumn::make('category_id')
+                // TextColumn::make('category_id')
+                //     ->numeric()
+                //     ->sortable(),
+                TextColumn::make('category.name')
+                    ->label('Nama Kategori')
                     ->numeric()
                     ->sortable(),
-                TextColumn::make('supplier_id')
+                TextColumn::make('supplier.name')
+                    ->label('Supllier')
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('sku')

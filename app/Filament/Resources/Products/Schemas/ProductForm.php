@@ -27,14 +27,14 @@ class ProductForm
                 // 3. Dropdown Kategori 
                 Select::make('category_id')
                     ->relationship('category', 'name')
-                    ->searchable()
+                    // ->searchable()
                     ->preload() 
                     ->required(),
 
                 // 4. Dropdown Supplier 
                 Select::make('supplier_id')
                     ->relationship('supplier', 'name')
-                    ->searchable()
+                    // ->searchable()
                     ->preload(), 
 
                 // 5. Harga Beli
