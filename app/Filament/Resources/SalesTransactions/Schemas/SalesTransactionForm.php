@@ -33,7 +33,14 @@ class SalesTransactionForm
                 DatePicker::make('transaction_date')
                     ->default(now())
                     ->required(),
-
+                Select::make('status')
+                    ->options([
+                        'draft' => 'Draft',
+                        'completed' => 'Completed',
+                        'cancelled' => 'Cancelled',
+                    ])
+                    ->default('draft')
+                    ->required(),
                 Textarea::make('notes'),
 
                 Hidden::make('created_by')

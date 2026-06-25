@@ -12,6 +12,7 @@ class SalesTransaction extends Model
         'transaction_date',
         'grand_total',
         'notes',
+        'status',
         'created_by',
     ];
 
@@ -50,5 +51,12 @@ class SalesTransaction extends Model
             '0',
             STR_PAD_LEFT
         );
+    }
+
+    public function recalculateGrandTotal(): void
+    {
+        $this->update([
+            'grand_total' => $this->items()->sum('subtotal'),
+        ]);
     }
 }

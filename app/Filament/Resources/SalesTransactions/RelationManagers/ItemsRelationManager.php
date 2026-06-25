@@ -95,13 +95,26 @@ class ItemsRelationManager extends RelationManager
                 //
             ])
             ->headerActions([
-                CreateAction::make(),
-                // AssociateAction::make(),
+                CreateAction::make()
+                    ->after(function ($record) {
+
+                        $record->salesTransaction
+                            ->recalculateGrandTotal();
+                    }),
             ])
             ->recordActions([
-                EditAction::make(),
-                // DissociateAction::make(),
-                DeleteAction::make(),
+                EditAction::make()
+                    ->after(function ($record) {
+
+                        $record->salesTransaction
+                            ->recalculateGrandTotal();
+                    }),
+                DeleteAction::make()
+                    ->after(function ($record) {
+
+                        $record->salesTransaction
+                            ->recalculateGrandTotal();
+                    }),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
