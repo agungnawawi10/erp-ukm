@@ -2,6 +2,8 @@
 
 namespace App\Filament\Resources\PurchaseOrders\Tables;
 
+use App\Services\InventoryService;
+use Filament\Actions\Action;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
@@ -58,7 +60,46 @@ class PurchaseOrdersTable
                 //
             ])
             ->recordActions([
+
                 EditAction::make(),
+
+                Action::make('approve')
+                    ->label('Approve')
+                    ->icon('heroicon-o-check-circle')
+                    ->color('success')
+                    ->requiresConfirmation()
+                    ->visible(fn($record) => ($record->status?->value ?? $record->status) === 'draft')
+                    ->action(function ($record) {
+
+                        $record->update([
+                            'status' => 'approved',
+                        ]);
+                    }),
+
+                Action::make('receive')
+                    ->label('Receive')
+                    ->icon('heroicon-o-arrow-down-tray')
+                    ->color('warning')
+                    ->requiresConfirmation()
+                    ->visible(fn($record) => ($record->status?->value ?? $record->status) === 'approved')
+                    ->action(function ($record) {
+
+                        $inventoryService = app(InventoryService::class);
+
+                        foreach ($record->items as $item) {
+
+                            $inventoryService->stockIn(
+                                $item->product,
+                                $item->quantity,
+                                'Goods Receipt PO ' . $record->po_number
+                            );
+                        }
+
+                        $record->update([
+                            'status' => 'received',
+                        ]);
+                    }),
+
             ])
             ->toolbarActions([
                 BulkActionGroup::make([

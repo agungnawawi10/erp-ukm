@@ -35,13 +35,11 @@ class PurchaseOrderForm
                     ->required(),
                 DatePicker::make('order_date')
                     ->required(),
-                Select::make('status')
+                TextInput::make('status')
                     ->label('Status')
-                    ->options(collect(EnumsPOStatus::cases())->mapWithKeys(fn($status) => [
-                        $status->value => ucfirst($status->value)
-                    ])->toArray())
-                    ->default('draft')
-                    ->required(),
+                    ->default(EnumsPOStatus::DRAFT->value)
+                    ->disabled()
+                    ->dehydrated(),
                 Textarea::make('notes')
                     ->columnSpanFull(),
                 Hidden::make('created_by')
