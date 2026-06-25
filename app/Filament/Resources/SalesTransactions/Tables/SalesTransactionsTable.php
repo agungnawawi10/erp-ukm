@@ -1,47 +1,34 @@
 <?php
 
-namespace App\Filament\Resources\Products\Tables;
+namespace App\Filament\Resources\SalesTransactions\Tables;
 
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
-use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
-class ProductsTable
+class SalesTransactionsTable
 {
     public static function configure(Table $table): Table
     {
         return $table
             ->columns([
-                // TextColumn::make('category_id')
-                //     ->numeric()
-                //     ->sortable(),
-                TextColumn::make('category.name')
-                    ->label('Nama Kategori')
-                    ->numeric()
-                    ->sortable(),
-                TextColumn::make('supplier.name')
-                    ->label('Supllier')
-                    ->numeric()
-                    ->sortable(),
-                TextColumn::make('sku')
-                    ->label('SKU')
+                TextColumn::make('invoice_number')
                     ->searchable(),
-                TextColumn::make('name')
-                    ->searchable(),
-                TextColumn::make('purchase_price')
-                    ->money('IDR')
-                    ->sortable(),
-                TextColumn::make('selling_price')
-                    ->money('IDR')
-                    ->sortable(),
-                TextColumn::make('stock')
+                TextColumn::make('customer.name')
                     ->numeric()
                     ->sortable(),
-                ImageColumn::make('image')
-                    ->circular(),
+                TextColumn::make('transaction_date')
+                    ->date()
+                    ->sortable(),
+                TextColumn::make('grand_total')
+                    ->numeric()
+                    ->sortable(),
+                TextColumn::make('creator.name')
+                    ->label('Created By')
+                    ->searchable()
+                    ->sortable(),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

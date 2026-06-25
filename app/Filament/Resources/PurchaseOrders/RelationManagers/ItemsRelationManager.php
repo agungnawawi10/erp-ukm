@@ -62,11 +62,11 @@ class ItemsRelationManager extends RelationManager
                 TextInput::make('price')
                     ->required()
                     ->numeric()
-                    ->prefix('$'),
+                    ->prefix('IDR'),
                 TextInput::make('subtotal')
                     ->required()
                     ->numeric()
-                    ->prefix('$')
+                    ->prefix('IDR')
                     ->disabled()
                     ->dehydrated() // Tetap tersimpan ke database walau kolomnya di-disabled
                     ->readonly(),
@@ -82,8 +82,9 @@ class ItemsRelationManager extends RelationManager
                 TextEntry::make('quantity')
                     ->numeric(),
                 TextEntry::make('price')
-                    ->money(),
+                    ->money('IDR'),
                 TextEntry::make('subtotal')
+                    ->money('IDR')
                     ->numeric(),
                 TextEntry::make('created_at')
                     ->dateTime()
@@ -107,10 +108,11 @@ class ItemsRelationManager extends RelationManager
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('price')
-                    ->money()
+                    ->money('IDR')
                     ->sortable(),
                 TextColumn::make('subtotal')
                     ->numeric()
+                    ->money('IDR')
                     ->sortable(),
                 TextColumn::make('created_at')
                     ->dateTime()
