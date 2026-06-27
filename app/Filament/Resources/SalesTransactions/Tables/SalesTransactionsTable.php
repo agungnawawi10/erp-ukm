@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\SalesTransactions\Tables;
 
+use App\Models\Income;
 use App\Services\InventoryService;
 use Filament\Actions\Action;
 use Filament\Actions\BulkActionGroup;
@@ -85,6 +86,15 @@ class SalesTransactionsTable
                             $record->update([
                                 'status' => 'completed',
                             ]);
+
+                            if (! $record->incomes()->exists()) {
+                                Income::create([
+                                    'sales_transaction_id' => $record->id,
+                                    'income_date' => now(),
+                                    'amount' => $record->grand_total,
+                                    'description' => 'Sales Invoice ' . $record->invoice_number,
+                                ]);
+                            }
                         });
                     }),
 

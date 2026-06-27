@@ -59,4 +59,9 @@ class SalesTransaction extends Model
             'grand_total' => $this->items()->sum('subtotal'),
         ]);
     }
+
+    public function incomes()
+    {
+        return $this->hasMany(Income::class);
+    }
 }
