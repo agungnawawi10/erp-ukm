@@ -9,6 +9,8 @@ use Filament\Widgets\TableWidget;
 
 class LowStockProductsWidget extends TableWidget
 {
+    protected int|string|array $columnSpan = 2;
+    // protected static ?int $sort = 2;
     protected static ?string $heading = 'Low Stock Products';
 
     public function table(Table $table): Table
@@ -22,7 +24,8 @@ class LowStockProductsWidget extends TableWidget
             ->columns([
                 TextColumn::make('name')
                     ->label('Product'),
-
+                TextColumn::make('category')
+                    ->label('Category'),
                 TextColumn::make('stock')
                     ->badge()
                     ->color('danger'),

@@ -20,6 +20,8 @@ class ExpenseResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
+    protected static string|\UnitEnum|null $navigationGroup = 'Finance';
+
     public static function form(Schema $schema): Schema
     {
         return ExpenseForm::configure($schema);
