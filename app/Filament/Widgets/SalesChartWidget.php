@@ -8,7 +8,7 @@ use Filament\Widgets\ChartWidget;
 class SalesChartWidget extends ChartWidget
 {
     // protected static ?int $sort = 2;
-    protected int|string|array $columnSpan = 2;
+    protected int|string|array $columnSpan = 3;
     protected ?string $heading = 'Sales Chart';
     protected function getData(): array
     {

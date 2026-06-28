@@ -5,6 +5,7 @@ namespace App\Filament\Widgets;
 use App\Models\Expense;
 use App\Models\Income;
 use App\Models\Product;
+use App\Models\SalesTransaction;
 use App\Models\SalesTransactionItem;
 use Filament\Widgets\StatsOverviewWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
@@ -34,6 +35,13 @@ class BusinessOverviewWidget extends StatsOverviewWidget
                 ->description('Total penjualan')
                 ->color('success')
                 ->icon('heroicon-o-banknotes'),
+            Stat::make(
+                'Transactions',
+                SalesTransaction::where('status', 'completed')->count()
+            )
+                ->description('Completed transactions')
+                ->color('primary')
+                ->icon('heroicon-o-receipt-percent'),
 
             Stat::make(
                 'Products',
@@ -50,14 +58,22 @@ class BusinessOverviewWidget extends StatsOverviewWidget
                 ->description('Laba bersih')
                 ->color($profit >= 0 ? 'success' : 'danger')
                 ->icon('heroicon-o-chart-bar'),
+                
+            Stat::make(
+                'Income',
+                'Rp ' . number_format(Income::sum('amount'), 0, ',', '.')
+            )
+                ->description('Total pemasukan')
+                ->color('success')
+                ->icon('heroicon-o-arrow-trending-up'),
 
             Stat::make(
-                'Low Stock',
-                Product::where('stock', '<=', 10)->count()
+                'Expense',
+                'Rp ' . number_format(Expense::sum('amount'), 0, ',', '.')
             )
-                ->description('Produk hampir habis')
-                ->color('warning')
-                ->icon('heroicon-o-exclamation-triangle'),
+                ->description('Total pengeluaran')
+                ->color('danger')
+                ->icon('heroicon-o-arrow-trending-down'),
         ];
     }
 }

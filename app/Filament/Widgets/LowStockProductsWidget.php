@@ -24,8 +24,8 @@ class LowStockProductsWidget extends TableWidget
             ->columns([
                 TextColumn::make('name')
                     ->label('Product'),
-                TextColumn::make('category')
-                    ->label('Category'),
+                // TextColumn::make('category')
+                //     ->label('Category'),
                 TextColumn::make('stock')
                     ->badge()
                     ->color('danger'),
