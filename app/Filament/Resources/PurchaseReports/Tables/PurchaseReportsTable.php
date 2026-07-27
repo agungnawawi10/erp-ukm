@@ -1,5 +1,6 @@
 <?php
 
+use Filament\Actions\Action;
 use Filament\Forms\Components\DatePicker;
 use Filament\Tables\Columns\Summarizers\Sum;
 use Filament\Tables\Columns\TextColumn;
@@ -12,6 +13,15 @@ class PurchaseReportsTable
   public static function configure(Table $table): Table
   {
     return $table
+      ->headerActions([
+        Action::make('export')
+          ->label('Export Excel')
+          ->icon('heroicon-o-arrow-down-tray')
+          ->url(fn($livewire): string => route('purchase-reports.export', [
+            'tableFilters' => $livewire->tableFilters ?? [],
+          ]))
+          ->openUrlInNewTab(),
+      ])
       ->columns([
         TextColumn::make('purchase_number')
           ->label('Purchase No')
