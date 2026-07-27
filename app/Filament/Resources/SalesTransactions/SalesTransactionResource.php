@@ -18,7 +18,7 @@ class SalesTransactionResource extends Resource
 {
     protected static ?string $model = SalesTransaction::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedShoppingCart;
 
     protected static string|\UnitEnum|null $navigationGroup = 'Sales';
 
