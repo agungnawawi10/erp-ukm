@@ -3,9 +3,7 @@
 use App\Http\Controllers\InvoiceController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::redirect('/', '/admin');
 
 Route::get(
     '/invoice/{salesTransaction}/print',
