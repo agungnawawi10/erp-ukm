@@ -59,8 +59,13 @@ class SalesTransactionsTable
                     ->icon('heroicon-o-check-circle')
                     ->color('success')
                     ->requiresConfirmation()
-                    ->visible(fn($record) => $record->status === 'draft')
+                    ->visible(fn($record) =>
+                    $record->status === 'draft' && auth()->user()?->hasAnyRole(['super-admin', 'cashier']))
                     ->action(function ($record) {
+                        // Validasi ulang di backend untuk keamanan ekstra
+                        if (!auth()->user()?->hasAnyRole(['super-admin', 'cashier'])) {
+                            throw new \Exception('Anda tidak memiliki hak akses untuk menyelesaikan transaksi ini.');
+                        }
 
                         if ($record->status !== 'draft') {
                             return;
