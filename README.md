@@ -1,58 +1,67 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 🚀 ERP UKM System
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Sistem Enterprise Resource Planning (ERP) berbasis web modern yang dirancang khusus untuk skala UKM. Dibangun menggunakan teknologi terkini untuk mengotomatisasi pencatatan inventaris, siklus pembelian, transaksi penjualan, manajemen keuangan, hingga pelaporan analitik secara real-time.
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 🛠️ Tech Stack & Architecture
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+* **Framework Backend:** Laravel 13
+* **Admin Panel & UI:** Laravel Filament  v5.6.7
+* **Authorization:** Spatie Laravel Permission (Role & Permission Management)
+* **Database Management:** MySQL 
+* **Service Layer Pattern:** Terintegrasi dengan kustom *InventoryService* dan modul keuangan otomatis.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+---
 
-## Learning Laravel
+## 📦 Core Modules & Features
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+Sistem MVP ERP UKM ini mencakup modul-modul fungsional utama berikut:
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+1. **Authentication & User Management**
+   * Secure Login & Logout system.
+   * Role & Permission control (Super Admin, Manager, Cashier) menggunakan Spatie.
+   * Manajemen Data User.
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+2. **Master Data**
+   * CRUD Kategori Barang.
+   * CRUD Supplier & Manajemen Relasi.
+   * CRUD Produk lengkap dengan manajemen stok dan upload gambar.
 
-## Agentic Development
+3. **Inventory Management**
+   * Pencatatan Stok Masuk & Stok Keluar.
+   * Stock Movement Log (Riwayat pergerakan stok).
+   * Validasi stok otomatis untuk mencegah *overselling*.
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+4. **Purchasing (Pembelian)**
+   * Purchase Order (PO) Header & Detail.
+   * Workflow Approval PO.
+   * Proses Penerimaan Barang (*Receive Goods*) dengan *auto-update* stok inventaris secara real-time.
 
-```bash
-composer require laravel/boost --dev
+5. **Sales (Penjualan)**
+   * Manajemen Pelanggan (Customer CRUD).
+   * Transaksi Penjualan (*Sales Transaction*) dengan sistem *draft* dan *completed*.
+   * Generate Nomor Invoice otomatis.
+   * Pengurangan stok otomatis (*auto-deduct stock*) serta pencatatan pendapatan (*Income*) terintegrasi.
+   * Cetak Invoice dalam format PDF.
 
-php artisan boost:install
-```
+6. **Finance & Accounting**
+   * Modul Pencatatan Pemasukan (*Income*).
+   * Modul Pencatatan Pengeluaran (*Expense*).
+   * Laporan Arus Kas (*Cash Flow Report*) & Kalkulasi Laba (*Profit Calculation*).
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+7. **Reporting & Analytics**
+   * Laporan Penjualan & Pembelian komprehensif.
+   * Fitur Ekspor data ke format Excel dan PDF.
+   * Dashboard interaktif dengan widget total sales, total produk, low-stock alert, dan grafik penjualan real-time.
 
-## Contributing
+---
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## ⚙️ Installation & Setup
 
-## Code of Conduct
+Ikuti langkah-langkah berikut untuk menjalankan proyek ini secara lokal:
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+1. **Clone Repository**
+   ```bash
+   git clone [https://github.com/username/erp-ukm.git](https://github.com/username/erp-ukm.git)
+   cd erp-ukm
