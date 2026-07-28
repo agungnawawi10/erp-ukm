@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\PurchaseReports;
 
+use App\Filament\Resources\BaseResource;
 use App\Filament\Resources\PurchaseReports\Pages\ManagePurchaseReports;
 use App\Models\PurchaseOrder;
 use BackedEnum;
@@ -20,7 +21,7 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use PurchaseReportsTable;
 
-class PurchaseReportResource extends Resource
+class PurchaseReportResource extends BaseResource
 {
     protected static ?string $model = PurchaseOrder::class;
 
@@ -37,6 +38,10 @@ class PurchaseReportResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'purchase_number';
 
+    public static function canViewAny(): bool
+    {
+        return static::hasRole('manager');
+    }
     public static function getEloquentQuery(): Builder
     {
         return parent::getEloquentQuery()

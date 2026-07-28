@@ -31,7 +31,7 @@ class UserForm
                     ->required(),
                 Select::make('roles')
                     ->relationship('roles', 'name')
-                    ->multiple()
+                    // ->multiple()
                     ->preload()
             ]);
     }

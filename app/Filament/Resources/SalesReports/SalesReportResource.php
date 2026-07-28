@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\SalesReports;
 
+use App\Filament\Resources\BaseResource;
 use App\Filament\Resources\SalesReports\Pages\ManageSalesReports;
 use App\Models\SalesTransaction;
 use BackedEnum;
@@ -13,7 +14,7 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use SalesReportTable;
 
-class SalesReportResource extends Resource
+class SalesReportResource extends  BaseResource
 {
     protected static ?string $model = SalesTransaction::class;
 
@@ -28,6 +29,11 @@ class SalesReportResource extends Resource
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedChartBar;
 
     protected static ?string $recordTitleAttribute = 'name';
+
+    public static function canViewAny(): bool
+    {
+        return static::hasRole('manager');
+    }
 
 
     public static function getEloquentQuery(): Builder

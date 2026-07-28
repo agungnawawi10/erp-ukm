@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\PurchaseOrders;
 
+use App\Filament\Resources\BaseResource;
 use App\Filament\Resources\PurchaseOrders\Pages\CreatePurchaseOrder;
 use App\Filament\Resources\PurchaseOrders\Pages\EditPurchaseOrder;
 use App\Filament\Resources\PurchaseOrders\Pages\ListPurchaseOrders;
@@ -14,7 +15,7 @@ use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 
-class PurchaseOrderResource extends Resource
+class PurchaseOrderResource extends BaseResource
 {
     protected static ?string $model = PurchaseOrder::class;
 
@@ -23,6 +24,29 @@ class PurchaseOrderResource extends Resource
     protected static string|\UnitEnum|null $navigationGroup = 'Purchasing';
 
     protected static ?string $recordTitleAttribute = 'name';
+
+    public static function canViewAny(): bool
+    {
+        return static::hasRoles([
+            'manager',
+            'warehouse',
+        ]);
+    }
+
+    public static function canCreate(): bool
+    {
+        return static::hasRole('warehouse');
+    }
+
+    public static function canEdit($record): bool
+    {
+        return static::hasRole('warehouse');
+    }
+
+    public static function canDelete($record): bool
+    {
+        return static::hasRole('warehouse');
+    }
 
     public static function form(Schema $schema): Schema
     {

@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Incomes;
 
+use App\Filament\Resources\BaseResource;
 use App\Filament\Resources\Incomes\Pages\CreateIncome;
 use App\Filament\Resources\Incomes\Pages\EditIncome;
 use App\Filament\Resources\Incomes\Pages\ListIncomes;
@@ -16,13 +17,33 @@ use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 
-class IncomeResource extends Resource
+class IncomeResource extends BaseResource
 {
     protected static ?string $model = Income::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedArrowTrendingUp;
 
     protected static string|\UnitEnum|null $navigationGroup = 'Finance';
+
+    public static function canViewAny(): bool
+    {
+        return static::hasRole('manager');
+    }
+
+    public static function canCreate(): bool
+    {
+        return false;
+    }
+
+    public static function canEdit($record): bool
+    {
+        return false;
+    }
+
+    public static function canDelete($record): bool
+    {
+        return false;
+    }
 
     public static function form(Schema $schema): Schema
     {

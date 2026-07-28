@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Expenses;
 
+use App\Filament\Resources\BaseResource;
 use App\Filament\Resources\Expenses\Pages\CreateExpense;
 use App\Filament\Resources\Expenses\Pages\EditExpense;
 use App\Filament\Resources\Expenses\Pages\ListExpenses;
@@ -14,13 +15,33 @@ use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 
-class ExpenseResource extends Resource
+class ExpenseResource extends BaseResource
 {
     protected static ?string $model = Expense::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedArrowTrendingDown;
 
     protected static string|\UnitEnum|null $navigationGroup = 'Finance';
+
+    public static function canViewAny(): bool
+    {
+        return static::hasRole('manager');
+    }
+
+    public static function canCreate(): bool
+    {
+        return static::hasRole('manager');
+    }
+
+    public static function canEdit($record): bool
+    {
+        return static::hasRole('manager');
+    }
+
+    public static function canDelete($record): bool
+    {
+        return static::hasRole('manager');
+    }
 
     public static function form(Schema $schema): Schema
     {

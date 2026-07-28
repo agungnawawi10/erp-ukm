@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Categories;
 
+use App\Filament\Resources\BaseResource;
 use App\Filament\Resources\Categories\Pages\CreateCategory;
 use App\Filament\Resources\Categories\Pages\EditCategory;
 use App\Filament\Resources\Categories\Pages\ListCategories;
@@ -14,7 +15,7 @@ use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 
-class CategoryResource extends Resource
+class CategoryResource extends BaseResource
 {
     protected static ?string $model = Category::class;
 
@@ -22,6 +23,29 @@ class CategoryResource extends Resource
     protected static string|\UnitEnum|null $navigationGroup = 'Master Data';
 
     protected static ?string $recordTitleAttribute = 'name';
+
+    public static function canViewAny(): bool
+    {
+        return static::hasRoles([
+            'manager',
+            'warehouse',
+        ]);
+    }
+
+    public static function canCreate(): bool
+    {
+        return static::hasRole('warehouse');
+    }
+
+    public static function canEdit($record): bool
+    {
+        return static::hasRole('warehouse');
+    }
+
+    public static function canDelete($record): bool
+    {
+        return static::hasRole('warehouse');
+    }
 
     public static function form(Schema $schema): Schema
     {

@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\SalesTransactions;
 
+use App\Filament\Resources\BaseResource;
 use App\Filament\Resources\SalesTransactions\Pages\CreateSalesTransaction;
 use App\Filament\Resources\SalesTransactions\Pages\EditSalesTransaction;
 use App\Filament\Resources\SalesTransactions\Pages\ListSalesTransactions;
@@ -14,7 +15,7 @@ use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 
-class SalesTransactionResource extends Resource
+class SalesTransactionResource extends BaseResource
 {
     protected static ?string $model = SalesTransaction::class;
 
@@ -23,6 +24,29 @@ class SalesTransactionResource extends Resource
     protected static string|\UnitEnum|null $navigationGroup = 'Sales';
 
     protected static ?string $recordTitleAttribute = 'name';
+
+    public static function canViewAny(): bool
+    {
+        return static::hasRoles([
+            'manager',
+            'cashier',
+        ]);
+    }
+
+    public static function canCreate(): bool
+    {
+        return static::hasRole('cashier');
+    }
+
+    public static function canEdit($record): bool
+    {
+        return static::hasRole('cashier');
+    }
+
+    public static function canDelete($record): bool
+    {
+        return static::hasRole('cashier');
+    }
 
     public static function form(Schema $schema): Schema
     {

@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Suppliers;
 
+use App\Filament\Resources\BaseResource;
 use App\Filament\Resources\Suppliers\Pages\CreateSupplier;
 use App\Filament\Resources\Suppliers\Pages\EditSupplier;
 use App\Filament\Resources\Suppliers\Pages\ListSuppliers;
@@ -14,7 +15,7 @@ use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 
-class SupplierResource extends Resource
+class SupplierResource extends BaseResource
 {
     protected static ?string $model = Supplier::class;
 
@@ -22,6 +23,29 @@ class SupplierResource extends Resource
     protected static string|\UnitEnum|null $navigationGroup = 'Master Data';
 
     protected static ?string $recordTitleAttribute = 'name';
+
+    public static function canViewAny(): bool
+    {
+        return static::hasRoles([
+            'manager',
+            'warehouse',
+        ]);
+    }
+
+    public static function canCreate(): bool
+    {
+        return static::hasRole('warehouse');
+    }
+
+    public static function canEdit($record): bool
+    {
+        return static::hasRole('warehouse');
+    }
+
+    public static function canDelete($record): bool
+    {
+        return static::hasRole('warehouse');
+    }
 
     public static function form(Schema $schema): Schema
     {

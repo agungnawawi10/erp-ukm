@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Customers;
 
+use App\Filament\Resources\BaseResource;
 use App\Filament\Resources\Customers\Pages\CreateCustomer;
 use App\Filament\Resources\Customers\Pages\EditCustomer;
 use App\Filament\Resources\Customers\Pages\ListCustomers;
@@ -14,16 +15,42 @@ use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 
-class CustomerResource extends Resource
+class CustomerResource extends BaseResource
 {
     protected static ?string $model = Customer::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedUserGroup;
 
     protected static string|\UnitEnum|null $navigationGroup = 'Sales';
-    
+
 
     protected static ?string $recordTitleAttribute = 'name';
+
+    public static function canViewAny(): bool
+    {
+        return static::hasRoles([
+            'manager',
+            'warehouse',
+            'cashier',
+        ]);
+    }
+
+    public static function canCreate(): bool
+    {
+        return static::hasRoles([
+            'cashier',
+        ]);
+    }
+
+    public static function canEdit($record): bool
+    {
+        return static::hasRole('cashier');
+    }
+
+    public static function canDelete($record): bool
+    {
+        return static::hasRole('cashier');
+    }
 
     public static function form(Schema $schema): Schema
     {
