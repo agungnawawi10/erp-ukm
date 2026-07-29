@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\Suppliers\Pages;
 
 use App\Filament\Resources\Suppliers\SupplierResource;
+use App\Livewire\SupplierOverview;
 use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
 
@@ -14,6 +15,13 @@ class ListSuppliers extends ListRecords
     {
         return [
             CreateAction::make(),
+        ];
+    }
+
+    protected function getHeaderWidgets(): array
+    {
+        return [
+            SupplierOverview::class,
         ];
     }
 }

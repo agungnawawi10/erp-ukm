@@ -38,7 +38,7 @@ class ProductOverview extends StatsOverviewWidget
                 ->color('primary'),
 
             Stat::make('Total Stock', number_format($totalStock))
-                ->description('Total stok tersedia')
+                ->description('Total stok semua product')
                 ->icon('heroicon-o-archive-box')
                 ->color('info'),
 
