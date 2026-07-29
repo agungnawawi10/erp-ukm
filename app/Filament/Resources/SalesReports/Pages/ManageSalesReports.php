@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\SalesReports\Pages;
 
 use App\Filament\Resources\SalesReports\SalesReportResource;
+use App\Livewire\SalesTransactionOverview;
 use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ManageRecords;
 
