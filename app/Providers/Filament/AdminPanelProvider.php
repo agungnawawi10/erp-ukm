@@ -2,7 +2,7 @@
 
 namespace App\Providers\Filament;
 
-use App\Filament\Widgets\LowStockProductsWidget;
+// use App\Filament\Widgets\LowStockProductsWidget;
 use App\Filament\Widgets\SalesChartWidget;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
@@ -45,7 +45,7 @@ class AdminPanelProvider extends PanelProvider
             ->widgets([
                 BusinessOverviewWidget::class,
                 SalesChartWidget::class,
-                LowStockProductsWidget::class,
+                // LowStockProductsWidget::class,
             ])
             ->middleware([
                 EncryptCookies::class,

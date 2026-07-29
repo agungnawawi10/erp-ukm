@@ -8,8 +8,12 @@ use Filament\Widgets\ChartWidget;
 class SalesChartWidget extends ChartWidget
 {
     // protected static ?int $sort = 2;
-    protected int|string|array $columnSpan = 3;
+    protected int|string|array $columnSpan = 5;
     protected ?string $heading = 'Sales Chart';
+
+    // 1. Atur tinggi maksimal grafik di sini (contoh: 250px atau 300px)
+    protected ?string $maxHeight = '300px';
+
     protected function getData(): array
     {
         $sales = SalesTransaction::query()
