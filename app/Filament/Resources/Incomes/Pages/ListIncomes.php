@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\Incomes\Pages;
 
 use App\Filament\Resources\Incomes\IncomeResource;
+use App\Livewire\IncomeOverview;
 use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
 
@@ -14,6 +15,12 @@ class ListIncomes extends ListRecords
     {
         return [
             // CreateAction::make(),
+        ];
+    }
+    protected function getHeaderWidgets(): array
+    {
+        return [
+            IncomeOverview::class
         ];
     }
 }
