@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\StockMovements\Pages;
 
 use App\Filament\Resources\StockMovements\StockMovementResource;
+use App\Livewire\StockMovementOverview;
 use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
 
@@ -14,6 +15,12 @@ class ListStockMovements extends ListRecords
     {
         return [
             CreateAction::make(),
+        ];
+    }
+    protected function getHeaderWidgets(): array
+    {
+        return [
+            StockMovementOverview::class,
         ];
     }
 }
