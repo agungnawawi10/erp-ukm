@@ -29,7 +29,7 @@ class CustomerOverview extends StatsOverviewWidget
 
         $topCustomerLabel = $topCustomer && $topCustomer->orders_count > 0
             ? "{$topCustomer->name} ({$topCustomer->orders_count} pesanan)"
-            : 'Belum ada data';
+            : '-';
 
         return [
             Stat::make('Total Customers', $totalCustomers)
@@ -38,7 +38,7 @@ class CustomerOverview extends StatsOverviewWidget
                 ->color('primary'),
 
             Stat::make('Active Customers', $activeCustomers)
-                ->description('Pelanggan yang pernah bertransaksi')
+                ->description('Pelanggan yang aktif bertransaksi')
                 ->icon('heroicon-o-check-circle') 
                 ->color('success'),
 
